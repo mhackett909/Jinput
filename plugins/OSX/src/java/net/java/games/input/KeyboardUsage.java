@@ -38,9 +38,6 @@
 *****************************************************************************/
 package net.java.games.input;
 
-import java.util.Map;
-import java.util.HashMap;
-
 /** Mapping from Keyboard HID usages to Component.Identifier.Key
 * @author elias
 * @version 1.0

@@ -36,15 +36,13 @@
  * the design, construction, operation or maintenance of any nuclear facility
  *
  *****************************************************************************/
-package net.java.games.input.main;
-
-import java.io.IOException;
+package net.java.games.input;
 
 /** Java wrapper of RAWMOUSE
  * @author elias
  * @version 1.0
  */
-public final class RawMouseEvent {
+final class RawMouseEvent {
 	/* It seems that raw input scales wheel
 	 * the same way as direcinput
 	 */

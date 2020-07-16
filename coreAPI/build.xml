@@ -19,7 +19,7 @@
 			</classpath>
 		</javac>
     	<buildnumber/>
-		<copy file="src/java/net/java/games/input/Version.java" 
+		<copy file="src/java/net/java/games/input/Version.java"
     		 todir="build/src/java/net/java/games/input/" overwrite="true">
 			<filterset>
 				<filter token="BUILD_NUMBER" value="${build.number}"/>

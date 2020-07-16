@@ -36,20 +36,18 @@
  * the design, construction, operation or maintenance of any nuclear facility
  *
  *****************************************************************************/
-package net.java.games.input.dx8;
+package net.java.games.input;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
-import net.java.games.input.main.DummyWindow;
-import net.java.games.input.ControllerEnvironment;
 
 /** Java wrapper for IDirectInput
  * @author martak
  * @author elias
  * @version 1.0
  */
-public final class IDirectInput {
+final class IDirectInput {
 	private final List devices = new ArrayList();
 	private final long idirectinput_address;
 	private final DummyWindow window;

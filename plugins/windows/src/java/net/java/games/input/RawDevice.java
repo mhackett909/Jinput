@@ -36,21 +36,15 @@
  * the design, construction, operation or maintenance of any nuclear facility
  *
  *****************************************************************************/
-package net.java.games.input.raw;
+package net.java.games.input;
 
 import java.io.IOException;
-import net.java.games.input.main.DataQueue;
-import net.java.games.input.main.RawMouseEvent;
-import net.java.games.input.main.RawKeyboardEvent;
-import net.java.games.input.main.RawDeviceInfo;
-import net.java.games.input.Controller;
-import net.java.games.input.AbstractController;
 
 /** Java wrapper of RAWDEVICELIST
  * @author elias
  * @version 1.0
  */
-public final class RawDevice {
+final class RawDevice {
 	public final static int RI_MOUSE_LEFT_BUTTON_DOWN   = 0x0001;  // Left Button changed to down.
 	public final static int RI_MOUSE_LEFT_BUTTON_UP	 = 0x0002;  // Left Button changed to up.
 	public final static int RI_MOUSE_RIGHT_BUTTON_DOWN  = 0x0004;  // Right Button changed to down.

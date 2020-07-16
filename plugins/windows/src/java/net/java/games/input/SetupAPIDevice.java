@@ -36,7 +36,7 @@
  * the design, construction, operation or maintenance of any nuclear facility
  *
  *****************************************************************************/
-package net.java.games.input.main;
+package net.java.games.input;
 
 import java.io.IOException;
 
@@ -44,7 +44,7 @@ import java.io.IOException;
  * @author elias
  * @version 1.0
  */
-public final class SetupAPIDevice {
+final class SetupAPIDevice {
 	private final String device_instance_id;
 	private final String device_name;
 

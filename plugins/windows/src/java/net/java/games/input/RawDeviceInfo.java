@@ -36,17 +36,15 @@
  * the design, construction, operation or maintenance of any nuclear facility
  *
  *****************************************************************************/
-package net.java.games.input.main;
+package net.java.games.input;
 
 import java.io.IOException;
-import net.java.games.input.raw.RawDevice;
-import net.java.games.input.Controller;
 
 /** Java wrapper of RID_DEVICE_INFO
  * @author elias
  * @version 1.0
  */
-public abstract class RawDeviceInfo {
+abstract class RawDeviceInfo {
 	public abstract Controller createControllerFromDevice(RawDevice device, SetupAPIDevice setupapi_device) throws IOException;
 
 	public abstract int getUsage();

@@ -1,7 +1,5 @@
 package net.java.games.input;
 
-import java.io.IOException;
-
 public class LinuxJoystickPOV extends LinuxJoystickAxis {
 
 	private LinuxJoystickAxis hatX;

@@ -36,15 +36,13 @@
  * the design, construction, operation or maintenance of any nuclear facility
  *
  *****************************************************************************/
-package net.java.games.input.main;
-
-import java.io.IOException;
+package net.java.games.input;
 
 /** Java wrapper of RAWKEYBOARD
  * @author elias
  * @version 1.0
  */
-public final class RawKeyboardEvent {
+final class RawKeyboardEvent {
 	private long millis;
 	private int make_code;
 	private int flags;

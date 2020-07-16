@@ -3,7 +3,6 @@ package net.java.games.input.example;
 import net.java.games.input.Component;
 import net.java.games.input.Controller;
 import net.java.games.input.ControllerEnvironment;
-import net.java.games.input.test.ControllerTextTest;
 
 /**
  * This class shows how to read the values in a polling loop for the first mouse

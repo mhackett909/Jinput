@@ -36,7 +36,7 @@
  * the design, construction, operation or maintenance of any nuclear facility
  *
  *****************************************************************************/
-package net.java.games.input.dx8;
+package net.java.games.input;
 
 import java.io.IOException;
 import java.util.List;
@@ -44,17 +44,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Arrays;
-import net.java.games.input.main.DataQueue;
-import net.java.games.input.main.DIIdentifierMap;
-import net.java.games.input.main.DIDeviceObjectData;
-import net.java.games.input.main.DIEffectInfo;
-import net.java.games.input.main.DIDeviceObject;
-import net.java.games.input.main.DIComponent;
-import net.java.games.input.main.DummyWindow;
-import net.java.games.input.Rumbler;
-import net.java.games.input.Component;
-import net.java.games.input.AbstractController;
-import net.java.games.input.ControllerEnvironment;
 
 
 /** Java wrapper for IDirectInputDevice
@@ -62,7 +51,7 @@ import net.java.games.input.ControllerEnvironment;
  * @author elias
  * @version 1.0
  */
-public final class IDirectInputDevice {
+final class IDirectInputDevice {
 	public final static int GUID_XAxis = 1;
 	public final static int GUID_YAxis = 2;
 	public final static int GUID_ZAxis = 3;

@@ -41,7 +41,6 @@ package net.java.games.input;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.StringTokenizer;

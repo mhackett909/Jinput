@@ -36,15 +36,9 @@
  * the design, construction, operation or maintenance of any nuclear facility
  *
  *****************************************************************************/
-package net.java.games.input.dx8;
+package net.java.games.input;
 
 import java.io.IOException;
-import net.java.games.input.main.DirectInputEnvironmentPlugin;
-import net.java.games.input.Rumbler;
-import net.java.games.input.Controller;
-import net.java.games.input.Component;
-import net.java.games.input.main.DIEffectInfo;
-import net.java.games.input.main.DummyWindow;
 
 /** Java wrapper for IDirectInputEffect
  * @author elias

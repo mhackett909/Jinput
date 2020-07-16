@@ -1,0 +1,6 @@
+/.idea
+**/bin
+**/classes
+/coreAPI/build
+/coreAPI/apidocs
+/dist

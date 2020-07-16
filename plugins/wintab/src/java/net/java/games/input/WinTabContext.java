@@ -27,7 +27,6 @@ package net.java.games.input;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.java.games.input.main.DummyWindow;
 
 public class WinTabContext {
 

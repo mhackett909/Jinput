@@ -36,15 +36,12 @@
  * the design, construction, operation or maintenance of any nuclear facility
  *
  *****************************************************************************/
-package net.java.games.input.raw;
+package net.java.games.input;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashSet;
-import net.java.games.input.main.RawDeviceInfo;
-import net.java.games.input.main.DummyWindow;
 
 /** Java wrapper of RAWDEVICELIST
  * @author elias

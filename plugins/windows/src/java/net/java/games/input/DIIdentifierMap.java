@@ -36,14 +36,13 @@
  * the design, construction, operation or maintenance of any nuclear facility
  *
  *****************************************************************************/
-package net.java.games.input.main;
-import net.java.games.input.Component;
+package net.java.games.input;
 
 /**
  * @author elias
  * @version 1.0
  */
-public final class DIIdentifierMap {
+final class DIIdentifierMap {
 	public final static int DIK_ESCAPE		  = 0x01;
 	public final static int DIK_1			   = 0x02;
 	public final static int DIK_2			   = 0x03;
