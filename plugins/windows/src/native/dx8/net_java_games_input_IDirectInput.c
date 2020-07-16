@@ -9,7 +9,7 @@
 #include <jni.h>
 #include "dxversion.h"
 #include <dinput.h>
-#include "net_java_games_input_IDirectInput.h"
+#include "../net_java_games_input_IDirectInput.h"
 #include "util.h"
 #include "winutil.h"
 

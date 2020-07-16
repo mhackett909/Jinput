@@ -36,13 +36,13 @@
  * the design, construction, operation or maintenance of any nuclear facility
  *
  *****************************************************************************/
-package net.java.games.input;
+package net.java.games.input.main;
 
 /** Java wrapper for DIDEVICEOBJECTDATA
  * @author elias
  * @version 1.0
  */
-final class DIDeviceObjectData {
+public final class DIDeviceObjectData {
 	private int format_offset;
 	private int data;
 	private int millis;

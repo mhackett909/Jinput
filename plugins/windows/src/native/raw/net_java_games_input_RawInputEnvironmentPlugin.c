@@ -11,7 +11,7 @@
 #include <devguid.h>
 #include <regstr.h>
 #include <jni.h>
-#include "net_java_games_input_RawInputEnvironmentPlugin.h"
+#include "../net_java_games_input_RawInputEnvironmentPlugin.h"
 #include "util.h"
 #include "winutil.h"
 

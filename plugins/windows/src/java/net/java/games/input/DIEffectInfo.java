@@ -36,13 +36,15 @@
  * the design, construction, operation or maintenance of any nuclear facility
  *
  *****************************************************************************/
-package net.java.games.input;
+package net.java.games.input.main;
+
+import net.java.games.input.dx8.IDirectInputDevice;
 
 /** Java wrapper for DIEFFECTINFO
  * @author elias
  * @version 1.0
  */
-final class DIEffectInfo {
+public final class DIEffectInfo {
 	private final IDirectInputDevice device;
 	private final byte[] guid;
 	private final int guid_id;

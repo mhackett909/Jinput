@@ -36,7 +36,7 @@
  * the design, construction, operation or maintenance of any nuclear facility
  *
  *****************************************************************************/
-package net.java.games.input;
+package net.java.games.input.main;
 
 import java.io.IOException;
 
@@ -44,7 +44,7 @@ import java.io.IOException;
  * @author elias
  * @version 1.0
  */
-final class RawKeyboardEvent {
+public final class RawKeyboardEvent {
 	private long millis;
 	private int make_code;
 	private int flags;

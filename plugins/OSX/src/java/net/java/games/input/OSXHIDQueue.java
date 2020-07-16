@@ -138,4 +138,5 @@ final class OSXHIDQueue {
 		if (released)
 			throw new IOException("Queue is released");
 	}
+
 }

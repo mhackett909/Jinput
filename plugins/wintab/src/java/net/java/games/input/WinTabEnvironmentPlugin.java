@@ -31,6 +31,7 @@ import java.security.PrivilegedAction;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.java.games.input.main.DummyWindow;
 import net.java.games.util.plugins.Plugin;
 
 public class WinTabEnvironmentPlugin extends ControllerEnvironment implements Plugin {

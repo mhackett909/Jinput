@@ -50,7 +50,7 @@ import java.io.IOException;
  * contains a fixed number of axes, controllers, and rumblers.
  */
 public abstract class AbstractController implements Controller {
-	final static int EVENT_QUEUE_DEPTH = 32;
+	public final static int EVENT_QUEUE_DEPTH = 32;
 	
 	private final static Event event = new Event();
 	

@@ -237,6 +237,7 @@ final class LinuxJoystickDevice implements LinuxDevice {
 		close();
 	}
 
+
 	@Override
 	public String getFilename() {
 		throw new UnsupportedOperationException("Not supported yet.");

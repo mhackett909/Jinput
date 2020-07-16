@@ -8,7 +8,7 @@
 #include "rawwinver.h"
 #include <windows.h>
 #include <jni.h>
-#include "net_java_games_input_RawInputEventQueue.h"
+#include "../net_java_games_input_RawInputEventQueue.h"
 #include "util.h"
 
 static void handleMouseEvent(JNIEnv *env, jobject self, jmethodID add_method, LONG time, RAWINPUT *data) {

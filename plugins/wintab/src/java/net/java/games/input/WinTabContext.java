@@ -27,6 +27,7 @@ package net.java.games.input;
 
 import java.util.ArrayList;
 import java.util.List;
+import net.java.games.input.main.DummyWindow;
 
 public class WinTabContext {
 
@@ -79,5 +80,4 @@ public class WinTabContext {
 	private final static native long nOpen(long hwnd);
 	private final static native void nClose(long hCtx);
 	private final static native WinTabPacket[] nGetPackets(long hCtx);
-
 }

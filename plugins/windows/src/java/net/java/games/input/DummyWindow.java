@@ -36,7 +36,7 @@
  * the design, construction, operation or maintenance of any nuclear facility
  *
  *****************************************************************************/
-package net.java.games.input;
+package net.java.games.input.main;
 
 import java.io.IOException;
 
@@ -45,7 +45,7 @@ import java.io.IOException;
  * @author elias
  * @version 1.0
  */
-final class DummyWindow {
+public final class DummyWindow {
 	private final long hwnd_address;
 
 	public DummyWindow() throws IOException {

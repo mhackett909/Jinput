@@ -36,18 +36,20 @@
  * the design, construction, operation or maintenance of any nuclear facility
  *
  *****************************************************************************/
-package net.java.games.input;
+package net.java.games.input.dx8;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
+import net.java.games.input.main.DummyWindow;
+import net.java.games.input.ControllerEnvironment;
 
 /** Java wrapper for IDirectInput
  * @author martak
  * @author elias
  * @version 1.0
  */
-final class IDirectInput {
+public final class IDirectInput {
 	private final List devices = new ArrayList();
 	private final long idirectinput_address;
 	private final DummyWindow window;
@@ -82,7 +84,7 @@ final class IDirectInput {
 			IDirectInputDevice device = new IDirectInputDevice(window, address, instance_guid, product_guid, dev_type, dev_subtype, instance_name, product_name);
 			devices.add(device);
 		} catch (IOException e) {
-			DirectInputEnvironmentPlugin.logln("Failed to initialize device " + product_name + " because of: " + e);
+			ControllerEnvironment.logln("Failed to initialize device " + product_name + " because of: " + e);
 		}
 	}
 

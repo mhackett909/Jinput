@@ -62,4 +62,5 @@ final class OSXHIDDeviceIterator {
 		return nNext(iterator_address);
 	}
 	private final static native OSXHIDDevice nNext(long iterator_address) throws IOException;
+
 }

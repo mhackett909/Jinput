@@ -23,10 +23,13 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE
  */
-package net.java.games.input;
+package net.java.games.input.main;
 
 import java.util.ArrayList;
 import java.util.List;
+import net.java.games.input.Controller;
+import net.java.games.input.raw.RawInputEnvironmentPlugin;
+import net.java.games.input.ControllerEnvironment;
 
 /**
  * Combines the list of seperate keyboards and mice found with the raw plugin,

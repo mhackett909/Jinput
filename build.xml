@@ -10,18 +10,17 @@
 	
 	<target name="init">
 		<!-- If we are running in windows, set dx8 property to true -->
-		<condition property="windows" >
+		<condition property="dx8" >
 			<os family="windows" />
 		</condition>
 
 		<!-- If we are running in linux, set linux property to true -->
 		<condition property="linux" >
-			<!--<os family="unix" />-->
 			<os name="linux" />
 		</condition>
 
 		<!-- If we are running in Mac OS X, set osx property to true -->
-		<condition property="osx" >
+		<condition property="macosx" >
 			<and>
 				<os family="mac" />
 				<os family="unix" />

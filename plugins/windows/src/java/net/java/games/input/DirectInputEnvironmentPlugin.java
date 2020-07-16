@@ -36,7 +36,7 @@
  * the design, construction, operation or maintenance of any nuclear facility
  *
  *****************************************************************************/
-package net.java.games.input;
+package net.java.games.input.main;
 
 import java.security.AccessController;
 import java.security.PrivilegedAction;
@@ -44,8 +44,17 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
-
+import net.java.games.input.dx8.IDirectInputDevice;
+import net.java.games.input.dx8.IDirectInput;
+import net.java.games.input.raw.RawInputEnvironmentPlugin;
 import net.java.games.util.plugins.Plugin;
+import net.java.games.input.Component;
+import net.java.games.input.Controller;
+import net.java.games.input.AbstractController;
+import net.java.games.input.ControllerEnvironment;
+import net.java.games.input.Mouse;
+import net.java.games.input.Keyboard;
+
 
 /** DirectInput implementation of controller environment
  * @author martak
@@ -256,4 +265,5 @@ public final class DirectInputEnvironmentPlugin extends ControllerEnvironment im
 	public boolean isSupported() {
 		return supported;
 	}
-} // class DirectInputEnvironment
+
+}

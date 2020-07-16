@@ -9,11 +9,11 @@
     </target>
 
     <target name="compile" depends="init">
-        <javac srcdir="../windows/src/java" destdir="classes" debug="true" deprecation="true" source="1.5" target="1.5">
+        <javac nativeheaderdir="src/native" srcdir="../windows/src/java" destdir="classes" debug="true" deprecation="true" source="1.9" target="1.9">
         	<include name="**/DummyWindow.java"/>
 		</javac>
 
-    	<javac srcdir="src/java" destdir="classes" debug="true" deprecation="true" source="1.5" target="1.5">
+    	<javac srcdir="src/java" destdir="classes" debug="true" deprecation="true" source="1.9" target="1.9">
             <!-- To add something to the classpath: -->
             <classpath>
 				<pathelement location="../../coreAPI/bin/jinput-core.jar"/>
@@ -22,20 +22,7 @@
 		</javac>
 	</target>
 
-    <target depends="init,compile" name="create_jniheaders">
-		<javah destdir="src/native">
-            <classpath>
-                <pathelement path="classes"/>
-                <pathelement location="../../coreAPI/classes"/>
-            </classpath>
-			<class name="net.java.games.input.DummyWindow"/>
-			<class name="net.java.games.input.WinTabContext"/>
-			<class name="net.java.games.input.WinTabDevice"/>
-			<class name="net.java.games.input.WinTabComponent"/>
-		</javah>
-	</target>
-
-    <target name="compile_native" depends="init,create_jniheaders" if="wintab">
+    <target name="compile_native" depends="init,compile" if="wintab">
         <ant dir="src/native" target="compile"/>
 		<copy todir="bin">
 			<fileset dir="src/native" includes="*.dll"/>
@@ -55,14 +42,14 @@
         <mkdir dir="apidocs"/>
         <javadoc packagenames="net.*" 
                  destdir="apidocs"
-                 additionalparam="-source 1.5">
+                 additionalparam="-source 1.9">
             <sourcepath>
                 <pathelement location="src/java"/>
             </sourcepath>
              <classpath>
                 <pathelement location="../windows/src/java"/>
-				 <pathelement location="../../bin/jinput-core.jar"/>
-				<pathelement location="../../lib/jutils.jar"/>
+                 <pathelement location="../../coreAPI/bin/jinput-core.jar"/>
+                 <pathelement location="../../lib/jutils.jar"/>
             </classpath>
         </javadoc>
     </target>

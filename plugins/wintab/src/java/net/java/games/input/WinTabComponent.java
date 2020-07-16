@@ -209,4 +209,5 @@ public class WinTabComponent extends AbstractComponent {
 		
 		return cursors;
 	}
+
 }

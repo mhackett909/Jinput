@@ -36,8 +36,8 @@
  * the design, construction, operation or maintenance of any nuclear facility
  *
  *****************************************************************************/
-package net.java.games.input;
-
+package net.java.games.input.main;
+import net.java.games.input.Component;
 /**
  * @author elias
  * @version 1.0

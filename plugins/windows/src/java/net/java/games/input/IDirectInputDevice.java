@@ -36,7 +36,7 @@
  * the design, construction, operation or maintenance of any nuclear facility
  *
  *****************************************************************************/
-package net.java.games.input;
+package net.java.games.input.dx8;
 
 import java.io.IOException;
 import java.util.List;
@@ -44,13 +44,25 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Arrays;
+import net.java.games.input.main.DataQueue;
+import net.java.games.input.main.DIIdentifierMap;
+import net.java.games.input.main.DIDeviceObjectData;
+import net.java.games.input.main.DIEffectInfo;
+import net.java.games.input.main.DIDeviceObject;
+import net.java.games.input.main.DIComponent;
+import net.java.games.input.main.DummyWindow;
+import net.java.games.input.Rumbler;
+import net.java.games.input.Component;
+import net.java.games.input.AbstractController;
+import net.java.games.input.ControllerEnvironment;
+
 
 /** Java wrapper for IDirectInputDevice
  * @author martak
  * @author elias
  * @version 1.0
  */
-final class IDirectInputDevice {
+public final class IDirectInputDevice {
 	public final static int GUID_XAxis = 1;
 	public final static int GUID_YAxis = 2;
 	public final static int GUID_ZAxis = 3;
@@ -228,7 +240,7 @@ final class IDirectInputDevice {
 			enumEffects();
 			createRumblers();
 		} catch (IOException e) {
-			DirectInputEnvironmentPlugin.logln("Failed to create rumblers: " + e.getMessage());
+			ControllerEnvironment.logln("Failed to create rumblers: " + e.getMessage());
 		}
 		/* Some DirectInput lamer-designer made the device state
 		 * axis mode be per-device not per-axis, so I'll just

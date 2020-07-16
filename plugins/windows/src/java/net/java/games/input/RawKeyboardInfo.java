@@ -36,9 +36,12 @@
  * the design, construction, operation or maintenance of any nuclear facility
  *
  *****************************************************************************/
-package net.java.games.input;
+package net.java.games.input.main;
 
 import java.io.IOException;
+import net.java.games.input.raw.RawDevice;
+import net.java.games.input.Controller;
+import net.java.games.input.Rumbler;
 
 /** Java wrapper of RID_DEVICE_INFO_KEYBOARD
  * @author elias

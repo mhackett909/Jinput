@@ -149,4 +149,5 @@ public class WinTabDevice extends AbstractController {
 	private final static native int[] nGetAxisDetails(int deviceIndex, int axisId);
 	private final static native String[] nGetCursorNames(int deviceIndex);
 	private final static native int nGetMaxButtonCount(int deviceIndex);
+
 }

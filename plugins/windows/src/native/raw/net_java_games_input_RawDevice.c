@@ -9,7 +9,7 @@
 #include <windows.h>
 #include <winuser.h>
 #include <jni.h>
-#include "net_java_games_input_RawDevice.h"
+#include "../net_java_games_input_RawDevice.h"
 #include "util.h"
 
 JNIEXPORT jstring JNICALL Java_net_java_games_input_RawDevice_nGetName(JNIEnv *env, jclass unused, jlong handle_addr) {

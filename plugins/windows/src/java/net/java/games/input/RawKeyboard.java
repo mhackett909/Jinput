@@ -36,7 +36,7 @@
 * the design, construction, operation or maintenance of any nuclear facility
 *
 *****************************************************************************/
-package net.java.games.input;
+package net.java.games.input.main;
 
 import java.io.IOException;
 import java.util.List;
@@ -44,6 +44,14 @@ import java.util.ArrayList;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import net.java.games.input.raw.RawDevice;
+import net.java.games.input.Component.Identifier.Key;
+import net.java.games.input.AbstractComponent;
+import net.java.games.input.Event;
+import net.java.games.input.Component;
+import net.java.games.input.Rumbler;
+import net.java.games.input.Controller;
+import net.java.games.input.Keyboard;
 
 /**
 * @author elias

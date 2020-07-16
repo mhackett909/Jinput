@@ -36,13 +36,13 @@
  * the design, construction, operation or maintenance of any nuclear facility
  *
  *****************************************************************************/
-package net.java.games.input;
+package net.java.games.input.main;
 
 /**
  * @author elias
  * @version 1.0
  */
-final class DataQueue {
+public final class DataQueue {
 	private final Object[] elements;
 	private int position;
 	private int limit;

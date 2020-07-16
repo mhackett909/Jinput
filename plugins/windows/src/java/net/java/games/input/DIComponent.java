@@ -36,15 +36,17 @@
 * the design, construction, operation or maintenance of any nuclear facility
 *
 *****************************************************************************/
-package net.java.games.input;
+package net.java.games.input.main;
 
 import java.io.IOException;
+import net.java.games.input.AbstractComponent;
+import net.java.games.input.Component;
 
 /**
 * @author elias
 * @version 1.0
 */
-final class DIComponent extends AbstractComponent {
+public final class DIComponent extends AbstractComponent {
 	private final DIDeviceObject object;
 
 	public DIComponent(Component.Identifier identifier, DIDeviceObject object) {

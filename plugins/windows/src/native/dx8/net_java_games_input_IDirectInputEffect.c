@@ -9,7 +9,7 @@
 #include "dxversion.h"
 #include <jni.h>
 #include <dinput.h>
-#include "net_java_games_input_IDirectInputEffect.h"
+#include "../net_java_games_input_IDirectInputEffect.h"
 #include "util.h"
 
 JNIEXPORT void JNICALL Java_net_java_games_input_IDirectInputEffect_nRelease(JNIEnv *env, jclass unused, jlong address) {

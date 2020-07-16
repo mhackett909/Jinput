@@ -52,7 +52,6 @@ public final class LinuxEnvironmentPlugin extends ControllerEnvironment implemen
     private final static String POSTFIX64BIT = "64";
     private static boolean supported = false;
     private List<Controller> controllers = new ArrayList<Controller>();
-    //private Controller[] controllers;
     private List<LinuxDevice> devices = new ArrayList<LinuxDevice>();
     private final static LinuxDeviceThread device_thread = new LinuxDeviceThread();
     private HashMap<LinuxDevice,Controller> controllerDeviceMap = new HashMap<LinuxDevice,Controller>();
@@ -96,7 +95,7 @@ public final class LinuxEnvironmentPlugin extends ControllerEnvironment implemen
 	    }
 	    rescanEventControllers(eventControllers);
 	    // TODO implment rescan joystick controllers
-	    //enumerateJoystickControllers(jsControllers);
+	    //enumerateJoystickControllers(jsControlers);
 
 	    controllerArray = enumerateControllers(eventControllers, jsControllers);
 
@@ -153,7 +152,7 @@ public final class LinuxEnvironmentPlugin extends ControllerEnvironment implemen
 		    device.close();
 		}
 	    } catch (IOException e) {
-		logln("Failed to open device (" + event_file + "): " + e.getMessage());
+		logln("Insufficient privileges to open device (" + event_file + "): " + e.getMessage());
 	    }
 	}
     }
@@ -165,11 +164,9 @@ public final class LinuxEnvironmentPlugin extends ControllerEnvironment implemen
 	    	return name.startsWith("event");
 	    }
 	});
-	if (event_device_files == null)
-	    return;
+	if (event_device_files == null) return;
 	for (int i = 0; i < event_device_files.length; i++) {
 	    File event_file = event_device_files[i];
-
 	    // check for new events
 	    boolean isNewEvent = true;
 	    for(LinuxDevice testDevice:devices){
@@ -178,31 +175,30 @@ public final class LinuxEnvironmentPlugin extends ControllerEnvironment implemen
 		    break;
 		}
 	    }
-
 	    if(isNewEvent){
 		try {
 		    String path = getAbsolutePathPrivileged(event_file);
 		    LinuxEventDevice device = new LinuxEventDevice(path);
+		    if (controllerDeviceMap.get(device) != null) continue;
 		    try {
 			Controller controller = createControllerFromDevice(device);
 			if (controller != null) {
 			    controllers.add(controller);
+			    this.controllers.add(controller);
 			    devices.add(device);
 			    controllerDeviceMap.put(device, controller);
-			} else {
-			    device.close();
-			}
+			} else { device.close(); }
 		    } catch (IOException e) {
 			logln("Failed to create Controller: " + e.getMessage());
 			device.close();
 		    }
 		} catch (IOException e) {
-			logln("Failed to open device (" + event_file + "): " + e.getMessage());
+		    //	logln("Failed to open device (" + event_file + "): " + e.getMessage());
 		}
 	    }
 	}
 	// now check for a device that previous was connected and since has disconnected
-	ArrayList<LinuxDevice> removeDevices = new ArrayList<LinuxDevice>();
+	ArrayList<LinuxDevice> removeDevices = new ArrayList<>();
 	for(LinuxDevice testDevice:devices){
 	    boolean fileExists = false;
 	    for(int i = 0; i < event_device_files.length; i++){
@@ -212,9 +208,7 @@ public final class LinuxEnvironmentPlugin extends ControllerEnvironment implemen
 		    break;
 		}
 	    }
-	    if(!fileExists){
-		removeDevices.add(testDevice);
-	    }
+	    if(!fileExists) removeDevices.add(testDevice);    
 	}
 	for(LinuxDevice testDevice:removeDevices){
 	    devices.remove(testDevice);

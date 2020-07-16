@@ -36,15 +36,17 @@
  * the design, construction, operation or maintenance of any nuclear facility
  *
  *****************************************************************************/
-package net.java.games.input;
+package net.java.games.input.main;
 
 import java.io.IOException;
+import net.java.games.input.Component;
+import net.java.games.input.dx8.IDirectInputDevice;
 
 /** Java wrapper for DIDEVICEOBJECTINSTANCE
  * @author elias
  * @version 1.0
  */
-final class DIDeviceObject {
+public final class DIDeviceObject {
 	//DirectInput scales wheel deltas by 120
 	private final static int WHEEL_SCALE = 120;
 	

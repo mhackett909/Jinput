@@ -238,7 +238,8 @@ final class OSXHIDDevice {
 		}
 		return usage_pairs_list;
 	}
-*/	
+*/
+
 	private final void dumpProperties() {
 		log.info(toString());
 		dumpMap("", properties);
