@@ -2,7 +2,8 @@
 
 <project name="Game Input API" basedir="." default="all">
     <target name="init">
-		<property name="utils" location="../lib/jutils.jar"/>    
+		<property name="utils" location="../lib/jutils.jar"/>
+		<property name="api.version" value="2.0.6"/>
         <mkdir dir="apidocs"/> 
         <mkdir dir="classes"/> 
         <mkdir dir="bin"/> 

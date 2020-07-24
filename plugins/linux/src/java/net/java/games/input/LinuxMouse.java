@@ -59,7 +59,7 @@ final class LinuxMouse extends Mouse {
 	}
 
 	public final void pollDevice() throws IOException {
-		device.pollKeyStates();
+			device.pollKeyStates();
 	}
 
 	protected final boolean getNextDeviceEvent(Event event) throws IOException {

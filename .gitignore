@@ -1,6 +1,7 @@
 /.idea
+/dist
 **/bin
 **/classes
-/coreAPI/build
-/coreAPI/apidocs
-/dist
+**/build
+**/apidocs
+

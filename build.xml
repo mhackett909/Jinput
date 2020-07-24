@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<project name="Sun Games Initiative Client Technologies" basedir="." default="all" xmlns:artifact="urn:maven-artifact-ant">
+<project name="Sun Games Initiative Client Technologies" basedir="." default="all">
 	<echo message="${os.arch}"/>
 
 	<property name="api.version" value="2.0.6"/>
@@ -250,44 +250,29 @@
 		<path id="maven-ant-tasks.classpath" path="lib/maven-ant-tasks-2.1.0.jar"/>
 		<typedef resource="org/apache/maven/artifact/ant/antlib.xml" uri="urn:maven-artifact-ant"
 				 classpathref="maven-ant-tasks.classpath"/>
-
 		<filter token="VERSION" value="${mvn.version}"/>
-		<copy tofile="dist/jinput-${mvn.version}.pom" filtering="true">
-			<fileset file="jinput.pom"/>
-		</copy>
-		<copy tofile="dist/jinput-${mvn.version}-platform.pom" filtering="true">
-			<fileset file="jinput-platform.pom"/>
-		</copy>
-
-		<artifact:pom id="jinputpomfile" file="dist/jinput-${mvn.version}.pom"/>
-		<artifact:pom id="jinputplatformpomfile" file="dist/jinput-${mvn.version}-platform.pom"/>
-
 		<delete file="dist/jinput-natives-windows.zip"/>
 		<zip destfile="dist/jinput-natives-windows.zip">
 			<fileset dir="dist/">
 				<include name="**/*.dll"/>
 			</fileset>
 		</zip>
-
 		<delete file="dist/jinput-natives-linux.zip"/>
 		<zip destfile="dist/jinput-natives-linux.zip">
 			<fileset dir="dist/">
 				<include name="**/*.so"/>
 			</fileset>
 		</zip>
-
 		<delete file="dist/jinput-natives-osx.zip"/>
 		<zip destfile="dist/jinput-natives-osx.zip">
 			<fileset dir="dist/">
 				<include name="**/*.jnilib"/>
 			</fileset>
 		</zip>
-
 		<delete file="dist/jinput-javadoc.zip"/>
 		<zip destfile="dist/jinput-javadoc.zip">
 			<fileset dir="coreAPI/apidocs/"/>
 		</zip>
-
 		<delete file="dist/jinput-sources.zip"/>
 		<zip destfile="dist/jinput-sources.zip">
 			<fileset dir=".">
@@ -296,85 +281,10 @@
 				<include name="**/*.c"/>
 			</fileset>
 		</zip>
-
 		<zip destfile="dist/jinput-${mvn.version}.jar">
 			<zipfileset src="dist/jinput.jar">
 				<exclude name="net/java/games/util/**"/>
 			</zipfileset>
 		</zip>
-
-		<artifact:install file="dist/jinput-${mvn.version}.jar">
-			<pom refid="jinputpomfile"/>
-			<attach file="dist/jinput-javadoc.zip" classifier="javadoc" type="jar"/>
-			<attach file="dist/jinput-sources.zip" classifier="sources" type="jar"/>
-		</artifact:install>
-
-		<artifact:install file="dist/jinput=${mvn.version}-platform.pom">
-			<pom refid="jinputplatformpomfile"/>
-			<attach file="dist/jinput-natives-windows.zip" classifier="natives-windows" type="jar"/>
-			<attach file="dist/jinput-natives-linux.zip" classifier="natives-linux" type="jar"/>
-			<attach file="dist/jinput-natives-osx.zip" classifier="natives-osx" type="jar"/>
-		</artifact:install>
-	</target>
-
-	<target name="mvndeploy" depends="install" description="Installs jinput in to local mvn repo">
-		<artifact:mvn>
-			<arg value="org.apache.maven.plugins:maven-gpg-plugin:1.1:sign-and-deploy-file"/>
-			<arg value="-Durl=${maven-repository-url}"/>
-			<arg value="-DrepositoryId=${maven-repository-id}"/>
-			<arg value="-DpomFile=dist/jinput-${mvn.version}.pom"/>
-			<arg value="-Dfile=dist/jinput-${mvn.version}.jar"/>
-			<arg value="-Pgpg"/>
-		</artifact:mvn>
-		<artifact:mvn>
-			<arg value="org.apache.maven.plugins:maven-gpg-plugin:1.1:sign-and-deploy-file"/>
-			<arg value="-Durl=${maven-repository-url}"/>
-			<arg value="-DrepositoryId=${maven-repository-id}"/>
-			<arg value="-DpomFile=dist/jinput-${mvn.version}.pom"/>
-			<arg value="-Dfile=dist/jinput-javadoc.zip"/>
-			<arg value="-Dpackaging=jar"/>
-			<arg value="-Dclassifier=javadoc"/>
-			<arg value="-Pgpg"/>
-		</artifact:mvn>
-		<artifact:mvn>
-			<arg value="org.apache.maven.plugins:maven-gpg-plugin:1.1:sign-and-deploy-file"/>
-			<arg value="-Durl=${maven-repository-url}"/>
-			<arg value="-DrepositoryId=${maven-repository-id}"/>
-			<arg value="-DpomFile=dist/jinput-${mvn.version}.pom"/>
-			<arg value="-Dfile=dist/jinput-sources.zip"/>
-			<arg value="-Dpackaging=jar"/>
-			<arg value="-Dclassifier=sources"/>
-			<arg value="-Pgpg"/>
-		</artifact:mvn>
-		<artifact:mvn>
-			<arg value="org.apache.maven.plugins:maven-gpg-plugin:1.1:sign-and-deploy-file"/>
-			<arg value="-Durl=${maven-repository-url}"/>
-			<arg value="-DrepositoryId=${maven-repository-id}"/>
-			<arg value="-DpomFile=dist/jinput-${mvn.version}-platform.pom"/>
-			<arg value="-Dfile=dist/jinput-natives-windows.zip"/>
-			<arg value="-Dpackaging=jar"/>
-			<arg value="-Dclassifier=natives-windows"/>
-			<arg value="-Pgpg"/>
-		</artifact:mvn>
-		<artifact:mvn>
-			<arg value="org.apache.maven.plugins:maven-gpg-plugin:1.1:sign-and-deploy-file"/>
-			<arg value="-Durl=${maven-repository-url}"/>
-			<arg value="-DrepositoryId=${maven-repository-id}"/>
-			<arg value="-DpomFile=dist/jinput-${mvn.version}-platform.pom"/>
-			<arg value="-Dfile=dist/jinput-natives-linux.zip"/>
-			<arg value="-Dpackaging=jar"/>
-			<arg value="-Dclassifier=natives-linux"/>
-			<arg value="-Pgpg"/>
-		</artifact:mvn>
-		<artifact:mvn>
-			<arg value="org.apache.maven.plugins:maven-gpg-plugin:1.1:sign-and-deploy-file"/>
-			<arg value="-Durl=${maven-repository-url}"/>
-			<arg value="-DrepositoryId=${maven-repository-id}"/>
-			<arg value="-DpomFile=dist/jinput-${mvn.version}-platform.pom"/>
-			<arg value="-Dfile=dist/jinput-natives-osx.zip"/>
-			<arg value="-Dpackaging=jar"/>
-			<arg value="-Dclassifier=natives-osx"/>
-			<arg value="-Pgpg"/>
-		</artifact:mvn>
 	</target>
 </project>
