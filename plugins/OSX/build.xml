@@ -18,7 +18,7 @@
     </target>
 
     <target depends="init" name="compile">
-        <javac debug="true" deprecation="true" destdir="${build}" source="1.9" target="1.9" srcdir="src/java" nativeheaderdir="src/native">
+        <javac debug="true" deprecation="true" destdir="${build}" source="14" target="14" srcdir="src/java" nativeheaderdir="src/native">
             <classpath>
                 <pathelement location="../../coreAPI/bin/jinput-core.jar"/>
                 <pathelement location="../../lib/jutils.jar"/>
@@ -39,7 +39,7 @@
         <mkdir dir="apidocs"/>
         <javadoc packagenames="net.java.games.input.*" 
                  destdir="apidocs"
-                 additionalparam="-source 1.9"
+                 additionalparam="-source 14"
                  link="../../../coreAPI/apidocs">
             <sourcepath>
                 <pathelement location="src/java"/>
