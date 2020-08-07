@@ -29,4 +29,6 @@ public class LinuxCombinedController extends AbstractController {
 	public Type getType() {
 		return eventController.getType();
 	}
+	public LinuxAbstractController getEventController() { return eventController; }
+	public LinuxJoystickAbstractController getJoystickController() { return joystickController; }
 }

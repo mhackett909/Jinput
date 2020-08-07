@@ -67,4 +67,5 @@ final class LinuxJoystickAbstractController extends AbstractController {
 	public Type getType() {
 		return Controller.Type.STICK;
 	}
+
 }

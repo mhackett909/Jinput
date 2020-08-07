@@ -80,17 +80,20 @@ public final class LinuxEnvironmentPlugin extends ControllerEnvironment implemen
 			List<Controller> jsControllers = new ArrayList<>();
 			for (Controller controller : controllers) {
 				if (controller.getType() == Controller.Type.MOUSE ||
-						controller.getType() == Controller.Type.KEYBOARD) {
+						controller.getType() == Controller.Type.KEYBOARD)  {
 					eventControllers.add(controller);
-				} else jsControllers.add(controller);
+				} else if (controller.getType() == Controller.Type.STICK ||
+						controller.getType() == Controller.Type.FINGERSTICK ||
+						controller.getType() == Controller.Type.GAMEPAD) {
+					jsControllers.add(controller);
+				} else System.out.println("Unhandled controller type: "+controller.getType());
 			}
 			rescanEventControllers(eventControllers);
-			/*
-				TODO implement rescan joystick controllers
-				enumerateJoystickControllers(jsControllers);
-			*/
+			rescanJoystickControllers(jsControllers);
 			controllerArray = enumerateControllers(eventControllers, jsControllers);
 		} else controllerArray = new Controller[0];
+		controllers.clear();
+		Collections.addAll(controllers, controllerArray);
 		return controllerArray;
 	}
 	public boolean isSupported() { return supported; }
@@ -122,7 +125,8 @@ public final class LinuxEnvironmentPlugin extends ControllerEnvironment implemen
 				Controller jsController = jsControllers.get(j);
 				// compare
 				// Check if the nodes have the same name
-				if (evController.getName().equals(jsController.getName())) {
+				if (evController.getName().equals(jsController.getName()) &&
+				evController.getType() != jsController.getType()) {
 					// Check they have the same component count
 					Component[] evComponents = evController.getComponents();
 					Component[] jsComponents = jsController.getComponents();
@@ -135,7 +139,13 @@ public final class LinuxEnvironmentPlugin extends ControllerEnvironment implemen
 								foundADifference = true;
 						}
 						if (!foundADifference) {
-							localControllers.add(new LinuxCombinedController((LinuxAbstractController) eventControllers.remove(i), (LinuxJoystickAbstractController) jsControllers.remove(j)));
+							LinuxCombinedController combinedController = new LinuxCombinedController((LinuxAbstractController) eventControllers.remove(i), (LinuxJoystickAbstractController) jsControllers.remove(j));
+							localControllers.add(combinedController);
+							for (LinuxDevice device : devices) {
+								Controller deviceController = controllerDeviceMap.get(device);
+								if (deviceController == evController || deviceController == jsController)
+									controllerDeviceMap.put(device,combinedController);
+							}
 							i--;
 							j--;
 							break;
@@ -231,7 +241,6 @@ public final class LinuxEnvironmentPlugin extends ControllerEnvironment implemen
 							}
 							if (isNewEvent) {
 								controllers.add(controller);
-								this.controllers.add(controller);
 								controllerDeviceMap.put(device, controller);
 							}
 						} else device.close();
@@ -247,31 +256,85 @@ public final class LinuxEnvironmentPlugin extends ControllerEnvironment implemen
 		// now check for a device that previous was connected and since has disconnected
 		ArrayList<LinuxDevice> removeDevices = new ArrayList<>();
 		for (LinuxDevice testDevice : devices) {
-			boolean fileExists = false;
-			for (File event_file : event_device_files) {
-				String testDeviceFilename;
-				try {
+			if (testDevice instanceof LinuxEventDevice) {
+				boolean fileExists = false;
+				for (File event_file : event_device_files) {
+					String testDeviceFilename;
 					testDeviceFilename = testDevice.getFilename();
-				} catch (Exception e) {
-					continue;
+					if (testDeviceFilename.equals(event_file.getName())) {
+						fileExists = true;
+						break;
+					}
 				}
-				if (testDeviceFilename.equals(event_file.getName())) {
-					fileExists = true;
+				if (!fileExists) removeDevices.add(testDevice);
+			} else continue;
+		}
+		for (LinuxDevice testDevice : removeDevices) removeDevice(testDevice, controllers);
+	}
+	private void rescanJoystickControllers(List<Controller> controllers) {
+		File[] joystick_device_files = enumerateJoystickDeviceFiles("/dev/input");
+		if (joystick_device_files == null || joystick_device_files.length == 0) {
+			joystick_device_files = enumerateJoystickDeviceFiles("/dev");
+			if (joystick_device_files == null) return;
+		}
+		for (File event_file : joystick_device_files) {
+			if (!event_file.canRead()) continue; //Insufficient privileges
+			LinuxJoystickDevice device = null;
+			for (LinuxDevice knownDevice : devices) {
+				if (knownDevice.getFilename().equals(event_file.getAbsoluteFile().toString())) {
+					device = (LinuxJoystickDevice) knownDevice;
 					break;
 				}
 			}
-			if (!fileExists) removeDevices.add(testDevice);
-		}
-		for (LinuxDevice testDevice : removeDevices) {
-			devices.remove(testDevice);
-			try { testDevice.close(); }
-			catch (IOException ex) { }
-			Controller controller = controllerDeviceMap.get(testDevice);
-			if (controller != null) {
-				controllers.remove(controller);
-				this.controllers.remove(controller);
-				controllerDeviceMap.remove(testDevice);
+			if (device == null) {
+				try {
+					String path = getAbsolutePathPrivileged(event_file);
+					device = new LinuxJoystickDevice(path);
+					devices.add(device);
+					boolean isNewEvent = true;
+					Controller controller = createJoystickFromJoystickDevice(device);
+					if (controller != null) {
+						for (Controller knownControllers : controllerDeviceMap.values()) {
+							if (knownControllers.getName().equals(controller.getName()) &&
+									knownControllers.getType() == controller.getType())
+								isNewEvent = false;
+						}
+						if (isNewEvent) {
+							controllers.add(controller);
+							controllerDeviceMap.put(device, controller);
+						}
+					} else device.close();
+				} catch (IOException e) {
+					logln(e.getMessage());
+				}
 			}
+		}
+		// now check for a device that previous was connected and since has disconnected
+		ArrayList<LinuxDevice> removeDevices = new ArrayList<>();
+		for (LinuxDevice testDevice : devices) {
+			if (testDevice instanceof LinuxJoystickDevice) {
+				boolean fileExists = false;
+				for (File event_file : joystick_device_files) {
+					String testDeviceFilename = testDevice.getFilename();
+					if (testDeviceFilename.equals(event_file.getAbsoluteFile().toString())) {
+						fileExists = true;
+						break;
+					}
+				}
+				if (!fileExists) removeDevices.add(testDevice);
+			} else continue;
+		}
+		for (LinuxDevice testDevice : removeDevices) removeDevice(testDevice, controllers);
+	}
+	private void removeDevice(LinuxDevice device, List<Controller> controllers) {
+		devices.remove(device);
+		try { device.close(); }
+		catch (IOException ex) { }
+		Controller controller = controllerDeviceMap.get(device);
+		if (controller != null) {
+			controllers.remove(controller);
+			this.controllers.remove(controller);
+			controllerDeviceMap.remove(device);
 		}
 	}
 

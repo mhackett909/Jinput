@@ -41,7 +41,7 @@ final class LinuxJoystickDevice implements LinuxDevice {
 
 	private final long fd;
 	private final String name;
-
+    private final String filename;
 	private final LinuxJoystickEvent joystick_event = new LinuxJoystickEvent();
 	private final Event event = new Event();
 	private final LinuxJoystickButton[] buttons;
@@ -62,6 +62,7 @@ final class LinuxJoystickDevice implements LinuxDevice {
 		this.fd = nOpen(filename);
 		try {
 			this.name = getDeviceName();
+			this.filename = filename;
 			setBufferSize(AbstractController.EVENT_QUEUE_DEPTH);
 			buttons = new LinuxJoystickButton[getNumDeviceButtons()];
 			axes = new LinuxJoystickAxis[getNumDeviceAxes()];
@@ -238,6 +239,7 @@ final class LinuxJoystickDevice implements LinuxDevice {
 
 	@Override
 	public String getFilename() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		return filename;
+		//throw new UnsupportedOperationException("Not supported yet.");
 	}
 }
